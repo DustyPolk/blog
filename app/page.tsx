@@ -2,11 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import posts from '@/data/posts.json'
+import { prisma } from '@/lib/prisma'
 
-export const revalidate = 3600 // revalidate every hour
-
-export default function Home() {
+export default async function Home() {
+  const posts = await prisma.post.findMany()
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">Welcome to Our Modern Blog</h1>
