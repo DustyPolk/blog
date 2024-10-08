@@ -1,29 +1,56 @@
-[
-  {
-    "id": 1,
-    "title": "The Future of Web Development",
-    "excerpt": "Exploring the latest trends and technologies shaping the future of web development.",
-    "content": "Web development is constantly evolving, with new technologies and frameworks emerging regularly. In this post, we explore the latest trends shaping the future of web development, including serverless architectures, edge computing, and AI-driven development tools.\n\n## Serverless Architectures\n\nServerless computing is gaining popularity due to its scalability and cost-effectiveness. Here's a simple example of a serverless function using AWS Lambda and Node.js:\n\n```javascript\nexports.handler = async (event) => {\n  const name = event.queryStringParameters.name || 'World';\n  return {\n    statusCode: 200,\n    body: JSON.stringify({ message: `Hello, ${name}!` }),\n  };\n};\n```\n\n## Edge Computing\n\nEdge computing brings computation closer to the data source, reducing latency and improving performance. This is particularly useful for IoT devices and real-time applications.\n\n## AI-Driven Development Tools\n\nAI is revolutionizing the way we write and debug code. Tools like GitHub Copilot are changing the landscape of software development:\n\n```python\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Generate the first 10 Fibonacci numbers\nfib_sequence = [fibonacci(i) for i in range(10)]\nprint(fib_sequence)\n```\n\nThese advancements are changing the way developers work and the skills they need to stay competitive in the industry.",
-    "date": "2023-05-15",
-    "author": "Jane Doe",
-    "imageUrl": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
-  },
-  {
-    "id": 2,
-    "title": "Mastering React Hooks",
-    "excerpt": "A comprehensive guide to using React Hooks effectively in your projects.",
-    "content": "React Hooks have revolutionized the way we write React components, making it easier to reuse stateful logic and manage side effects. In this comprehensive guide, we'll dive deep into the most commonly used hooks.\n\n## useState\n\nThe `useState` hook allows you to add state to functional components:\n\n```jsx\nimport React, { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}\n```\n\n## useEffect\n\nThe `useEffect` hook lets you perform side effects in functional components:\n\n```jsx\nimport React, { useState, useEffect } from 'react';\n\nfunction Example() {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    document.title = `You clicked ${count} times`;\n  });\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}\n```\n\n## useContext\n\nThe `useContext` hook allows you to subscribe to React context without introducing nesting:\n\n```jsx\nimport React, { useContext } from 'react';\n\nconst ThemeContext = React.createContext('light');\n\nfunction ThemedButton() {\n  const theme = useContext(ThemeContext);\n  return <button className={theme}>I am styled by theme context!</button>;\n}\n```\n\nBy mastering these hooks and exploring custom hooks, you can write more efficient and maintainable React applications.",
-    "date": "2023-05-10",
-    "author": "John Smith",
-    "imageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-  },
-  {
-    "id": 3,
-    "title": "Building Scalable APIs with Node.js",
-    "excerpt": "Learn how to design and implement scalable APIs using Node.js and Express.",
-    "content": "As applications grow in complexity and user base, it's crucial to design APIs that can scale effectively. This post focuses on best practices for building scalable APIs using Node.js and Express.\n\n## Error Handling\n\nProper error handling is crucial for maintaining a robust API. Here's an example of a custom error handler middleware:\n\n```javascript\napp.use((err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).json({\n    error: {\n      message: 'An unexpected error occurred',\n      details: process.env.NODE_ENV === 'development' ? err.message : undefined\n    }\n  });\n});\n```\n\n## Rate Limiting\n\nImplement rate limiting to prevent abuse and ensure fair usage of your API:\n\n```javascript\nconst rateLimit = require('express-rate-limit');\n\nconst apiLimiter = rateLimit({\n  windowMs: 15 * 60 * 1000, // 15 minutes\n  max: 100 // limit each IP to 100 requests per windowMs\n});\n\napp.use('/api/', apiLimiter);\n```\n\n## Caching\n\nImplement caching to improve performance and reduce database load:\n\n```javascript\nconst mcache = require('memory-cache');\n\nconst cache = (duration) => {\n  return (req, res, next) => {\n    let key = '__express__' + req.originalUrl || req.url;\n    let cachedBody = mcache.get(key);\n    if (cachedBody) {\n      res.send(JSON.parse(cachedBody));\n      return;\n    } else {\n      res.sendResponse = res.send;\n      res.send = (body) => {\n        mcache.put(key, body, duration * 1000);\n        res.sendResponse(body);\n      };\n      next();\n    }\n  };\n};\n\napp.get('/api/data', cache(300), (req, res) => {\n  // Your API logic here\n});\n```\n\nBy implementing these practices, you can create robust and scalable APIs that can handle high traffic and complex business logic.",
-    "date": "2023-05-05",
-    "author": "Alice Johnson",
-    "imageUrl": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
-  }
-]
+    [
+      {
+        "id": 1,
+        "title": "The Future of Web Development",
+        "excerpt": "Exploring the latest trends and technologies shaping the future of web development.",
+        "content": "Web development is constantly evolving, with new technologies and frameworks emerging regularly. In this post, we explore the latest trends shaping the future of web development, including serverless architectures, edge computing, and AI-driven development tools.\n\n## Serverless Architectures\n\nServerless computing is gaining popularity due to its scalability and cost-effectiveness. Here's a simple example of a serverless function using AWS Lambda and Node.js:\n\n```javascript\nexports.handler = async (event) => {\n  const name = event.queryStringParameters.name || 'World';\n  return {\n    statusCode: 200,\n    body: JSON.stringify({ message: `Hello, ${name}!` }),\n  };\n};\n```\n\n## Edge Computing\n\nEdge computing brings computation closer to the data source, reducing latency and improving performance. This is particularly useful for IoT devices and real-time applications.\n\n## AI-Driven Development Tools\n\nAI is revolutionizing the way we write and debug code. Tools like GitHub Copilot are changing the landscape of software development:\n\n```python\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Generate the first 10 Fibonacci numbers\nfib_sequence = [fibonacci(i) for i in range(10)]\nprint(fib_sequence)\n```\n\nThese advancements are changing the way developers work and the skills they need to stay competitive in the industry.",
+        "date": "2023-05-15",
+        "author": "Jane Doe",
+        "imageUrl": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+      },
+      {
+        "id": 2,
+        "title": "Mastering React Hooks",
+        "excerpt": "A comprehensive guide to using React Hooks effectively in your projects.",
+        "content": "React Hooks have revolutionized the way we write React components, making it easier to reuse stateful logic and manage side effects. In this comprehensive guide, we'll dive deep into the most commonly used hooks.\n\n## useState\n\nThe `useState` hook allows you to add state to functional components:\n\n```jsx\nimport React, { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}\n```\n\n## useEffect\n\nThe `useEffect` hook lets you perform side effects in functional components:\n\n```jsx\nimport React, { useState, useEffect } from 'react';\n\nfunction Example() {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    document.title = `You clicked ${count} times`;\n  });\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}\n```\n\n## useContext\n\nThe `useContext` hook allows you to subscribe to React context without introducing nesting:\n\n```jsx\nimport React, { useContext } from 'react';\n\nconst ThemeContext = React.createContext('light');\n\nfunction ThemedButton() {\n  const theme = useContext(ThemeContext);\n  return <button className={theme}>I am styled by theme context!</button>;\n}\n```\n\nBy mastering these hooks and exploring custom hooks, you can write more efficient and maintainable React applications.",
+        "date": "2023-05-10",
+        "author": "John Smith",
+        "imageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      },
+      {
+        "id": 3,
+        "title": "Building Scalable APIs with Node.js",
+        "excerpt": "Learn how to design and implement scalable APIs using Node.js and Express.",
+        "content": "As applications grow in complexity and user base, it's crucial to design APIs that can scale effectively. This post focuses on best practices for building scalable APIs using Node.js and Express.\n\n## Error Handling\n\nProper error handling is crucial for maintaining a robust API. Here's an example of a custom error handler middleware:\n\n```javascript\napp.use((err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).json({\n    error: {\n      message: 'An unexpected error occurred',\n      details: process.env.NODE_ENV === 'development' ? err.message : undefined\n    }\n  });\n});\n```\n\n## Rate Limiting\n\nImplement rate limiting to prevent abuse and ensure fair usage of your API:\n\n```javascript\nconst rateLimit = require('express-rate-limit');\n\nconst apiLimiter = rateLimit({\n  windowMs: 15 * 60 * 1000, // 15 minutes\n  max: 100 // limit each IP to 100 requests per windowMs\n});\n\napp.use('/api/', apiLimiter);\n```\n\n## Caching\n\nImplement caching to improve performance and reduce database load:\n\n```javascript\nconst mcache = require('memory-cache');\n\nconst cache = (duration) => {\n  return (req, res, next) => {\n    let key = '__express__' + req.originalUrl || req.url;\n    let cachedBody = mcache.get(key);\n    if (cachedBody) {\n      res.send(JSON.parse(cachedBody));\n      return;\n    } else {\n      res.sendResponse = res.send;\n      res.send = (body) => {\n        mcache.put(key, body, duration * 1000);\n        res.sendResponse(body);\n      };\n      next();\n    }\n  };\n};\n\napp.get('/api/data', cache(300), (req, res) => {\n  // Your API logic here\n});\n```\n\nBy implementing these practices, you can create robust and scalable APIs that can handle high traffic and complex business logic.",
+        "date": "2023-05-05",
+        "author": "Alice Johnson",
+        "imageUrl": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+      },
+      {
+        "id": 4,
+        "title": "Introduction to TypeScript",
+        "excerpt": "Get started with TypeScript and enhance your JavaScript projects with strong typing.",
+        "content": "TypeScript extends JavaScript by adding types, which can help you catch errors early and make your code more maintainable. In this introduction, we'll cover the basics of TypeScript and how to integrate it into your projects.\n\n## Getting Started\n\nTo start using TypeScript, install it via npm:\n\n```bash\nnpm install typescript --save-dev\n```\n\nThen, initialize a TypeScript configuration file:\n\n```bash\ntsc --init\n```\n\n## Basic Types\n\nTypeScript provides several basic types including `string`, `number`, `boolean`, and more:\n\n```typescript\ntype User = {\n  id: number;\n  name: string;\n  isActive: boolean;\n};\n```\n\n## Interfaces\n\nInterfaces allow you to define the shape of an object:\n\n```typescript\ninterface Person {\n  firstName: string;\n  lastName: string;\n  age?: number; // Optional property\n}\n\nfunction greet(person: Person) {\n  console.log(`Hello, ${person.firstName} ${person.lastName}`);\n}\n```\n\nEmbracing TypeScript can lead to more robust and error-free codebases.",
+        "date": "2023-04-25",
+        "author": "Emily Clark",
+        "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      },
+      {
+        "id": 5,
+        "title": "Deploying Applications with Docker",
+        "excerpt": "Learn how to containerize and deploy your applications using Docker.",
+        "content": "Docker simplifies the process of deploying applications by containerizing them, ensuring consistency across different environments. This guide will walk you through the basics of Docker and how to deploy your first containerized application.\n\n## Installing Docker\n\nDownload and install Docker from the [official website](https://www.docker.com/get-started):\n\n```bash\n# For macOS\nbrew install --cask docker\n```\n\n## Writing a Dockerfile\n\nA `Dockerfile` defines the environment for your application:\n\n```dockerfile\nFROM node:14\n\nWORKDIR /app\n\nCOPY package*.json ./\n\nRUN npm install\n\nCOPY . .\n\nEXPOSE 3000\n\nCMD [\"npm\", \"start\"]\n```\n\n## Building and Running the Container\n\nBuild your Docker image:\n\n```bash\ndocker build -t my-app .\n```\n\nRun the container:\n\n```bash\ndocker run -p 3000:3000 my-app\n```\n\nDocker ensures that your application runs the same way in development, testing, and production environments.",
+        "date": "2023-04-20",
+        "author": "Michael Lee",
+        "imageUrl": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      },
+      {
+        "id": 6,
+        "title": "Understanding GraphQL",
+        "excerpt": "A deep dive into GraphQL and how it compares to REST APIs.",
+        "content": "GraphQL is a query language for APIs and a runtime for executing those queries. It provides a more efficient, powerful, and flexible alternative to REST.\n\n## Key Features\n\n- **Declarative Data Fetching**: Clients can specify exactly what data they need.\n- **Single Endpoint**: Unlike REST, GraphQL typically uses a single endpoint.\n- **Strongly Typed Schema**: Ensures reliable and predictable API behavior.\n\n## Example Query\n\n```graphql\nquery GetUser($id: ID!) {\n  user(id: $id) {\n    id\n    name\n    email\n  }\n}\n```\n\n## Setting Up a GraphQL Server with Apollo\n\nInstall Apollo Server:\n\n```bash\nnpm install apollo-server graphql\n```\n\nCreate a simple server:\n\n```javascript\nconst { ApolloServer, gql } = require('apollo-server');\n\nconst typeDefs = gql`\n  type User {\n    id: ID!\n    name: String!\n    email: String!\n  }\n\n  type Query {\n    user(id: ID!): User\n  }\n`;\n\nconst resolvers = {\n  Query: {\n    user: (_, { id }) => ({ id, name: 'John Doe', email: 'john@example.com' }),\n  },\n};\n\nconst server = new ApolloServer({ typeDefs, resolvers });\n\nserver.listen().then(({ url }) => {\n  console.log(`🚀 Server ready at ${url}`);\n});\n```\n\nGraphQL offers a powerful alternative to traditional REST APIs, enabling more efficient and flexible data fetching.",
+        "date": "2023-04-15",
+        "author": "Sophia Martinez",
+        "imageUrl": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      }
+    ]
